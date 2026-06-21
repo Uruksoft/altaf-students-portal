@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>تسجيل الدخول | مدرسة الطف الابتدائية</title>
+    
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#1e3c72">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="مدرسة الطف">
+    <link rel="apple-touch-icon" href="https://b.top4top.io/p_3738g1q971.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* 1. التصحيح الجذري لبناء متغيرات الـ CSS */
+        :root {
+            --primary: #1e3c72;
+            --secondary: #2a5298;
+            --accent: #f1c40f;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(-45deg, #f8fafc, #e2e8f0, #cbd5e1, #e0e7ff);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .shape { position: absolute; filter: blur(70px); z-index: -1; animation: float 12s infinite ease-in-out alternate; }
+        .shape-1 { width: 350px; height: 350px; background: rgba(30, 60, 114, 0.15); top: -100px; right: -50px; border-radius: 50%; }
+        .shape-2 { width: 450px; height: 450px; background: rgba(241, 196, 15, 0.1); bottom: -150px; left: -100px; border-radius: 50%; animation-delay: -6s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, 60px) scale(1.1); }
+        }
+
+        .glass-container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+            width: 90%;
+            max-width: 1000px;
+            display: flex;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .info-section {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .info-section img { width: 100px; margin-bottom: 20px; filter: drop-shadow(0 4px 15px rgba(0,0,0,0.4)); }
+        .info-section h1 { margin: 0 0 15px 0; font-size: 2.2rem; font-weight: 800; line-height: 1.3; }
+        .info-section p.desc { font-size: 1.05rem; line-height: 1.8; opacity: 0.95; margin-bottom: 30px; }
+        
+        .contact-box { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); }
+        .contact-box h3 { margin: 0 0 15px 0; font-size: 1.1rem; color: var(--accent); }
+        
+        .social-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn-social { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 8px; color: white; text-decoration: none; font-weight: bold; font-size: 1rem; transition: 0.3s; }
+        .btn-whatsapp { background: #25D366; } .btn-whatsapp:hover { background: #20b858; transform: translateY(-2px); }
+        .btn-telegram { background: #0088cc; } .btn-telegram:hover { background: #0077b5; transform: translateY(-2px); }
+
+        .login-section { flex: 1; padding: 50px 40px; display: flex; flex-direction: column; justify-content: center; }
+        .login-section h2 { color: var(--primary); font-size: 1.8rem; margin-top: 0; margin-bottom: 5px; font-weight: 800; }
+        .login-section p.subtitle { color: var(--text-light); margin-bottom: 30px; font-weight: 600; }
+
+        .input-group { margin-bottom: 20px; text-align: right; }
+        .input-group label { display: block; margin-bottom: 8px; color: var(--text-dark); font-weight: bold; font-size: 0.95rem; }
+        .input-group input { width: 100%; padding: 15px; border: 2px solid #e2e8f0; border-radius: 10px; font-family: 'Cairo'; font-weight: 700; box-sizing: border-box; outline: none; transition: 0.3s; font-size: 1.05rem; background: rgba(255,255,255,0.9); color: var(--text-dark); }
+        .input-group input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(30, 60, 114, 0.1); }
+
+        .btn-login { background: var(--primary); color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: 0.3s; font-family: 'Cairo'; box-shadow: 0 10px 20px rgba(30, 60, 114, 0.2); margin-top: 10px; }
+        .btn-login:hover { background: #152b52; transform: translateY(-2px); }
+        .btn-login:disabled { background: #94a3b8; cursor: not-allowed; transform: none; }
+
+        #error-msg { background: #fee2e2; color: #dc2626; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 15px; text-align: center; border: 1px solid #f87171; display: none; font-size: 0.95rem; }
+        footer { margin-top: 25px; text-align: center; color: var(--text-light); font-size: 0.95rem; font-weight: 700; z-index: 1; }
+
+        @media (max-width: 900px) {
+            .glass-container { flex-direction: column; width: 95%; margin: 20px 0; }
+            .info-section { padding: 30px 20px; text-align: center; } .info-section img { margin: 0 auto 15px auto; width: 85px; }
+            .login-section { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="shape shape-1"></div><div class="shape shape-2"></div>
+
+    <div class="glass-container">
+        <div class="info-section">
+            <img src="https://b.top4top.io/p_3738g1q971.png" alt="شعار مدرسة الطف">
+            <h1>إدارة مدرسة الطف الابتدائية للبنين</h1>
+            <p class="desc">بوابة إلكترونية متكاملة صُممت خصيصاً لإدارة ومتابعة التقييمات الأكاديمية والدرجات الشهرية.</p>
+            <div class="contact-box">
+                <h3>📞 تواصل مع الدعم الفني</h3>
+                <div class="social-buttons">
+                    <a href="https://wa.me/9647815202022" class="btn-social btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> واتساب</a>
+                    <a href="https://t.me/murtada2015" class="btn-social btn-telegram" target="_blank"><i class="fab fa-telegram-plane"></i> تيليجرام</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="login-section">
+            <h2>تسجيل الدخول للكادر</h2>
+            <p class="subtitle">الرجاء إدخال بيانات الاعتماد الممنوحة لك من الإدارة.</p>
+            <form id="login-form">
+                <div class="input-group"><label>البريد الإلكتروني</label><input type="email" id="email" placeholder="admin@school.com" dir="ltr" required autocomplete="username"></div>
+                <div class="input-group"><label>كلمة المرور</label><input type="password" id="password" placeholder="••••••••" dir="ltr" required autocomplete="current-password"></div>
+                <button type="submit" id="login-btn" class="btn-login">تسجيل الدخول</button>
+            </form>
+            <div id="error-msg"></div>
+        </div>
+    </div>
+
+    <footer>© 2026 جميع الحقوق محفوظة - نظام إدارة مدرسة الطف</footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const firebaseConfig = { 
+            apiKey: "AIzaSyDBMqHv6elH7q9S0niigrv7y7p8ZkEsOVE", 
+            authDomain: "altaf-students-portal.firebaseapp.com", 
+            projectId: "altaf-students-portal" 
+        };
+
+        // 2. تصفيح الفايربيز بـ Try..Catch حتى لا ينهار الموقع لو كان النت ضعيف
+        let app, auth;
+        try {
+            app = initializeApp(firebaseConfig); 
+            auth = getAuth(app);
+        } catch(e) {
+            console.error("Firebase init fallback:", e);
+        }
+
+        // 3. درع حماية PWA: لا يطلب التثبيت إلا لو كان شغال على سيرفر حقيقي أو Live Server
+        if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').catch(err => console.log("SW bypass notice:", err));
+            });
+        }
+
+        const loginForm = document.getElementById('login-form');
+        if(loginForm) {
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if(!auth) {
+                    alert("تعذر الاتصال بخوادم المصادقة. تأكد من جودة الإنترنت.");
+                    return;
+                }
+
+                const email = document.getElementById('email').value.trim(); 
+                const password = document.getElementById('password').value.trim();
+                const btn = document.getElementById('login-btn'); 
+                const errorMsg = document.getElementById('error-msg');
+
+                btn.innerText = "جاري التحقق... ⏳"; 
+                btn.disabled = true; 
+                errorMsg.style.display = 'none';
+
+                try {
+                    await signInWithEmailAndPassword(auth, email, password);
+                    window.location.replace("dashboard.html");
+                } catch (error) {
+                    errorMsg.textContent = "عذراً، البريد الإلكتروني أو كلمة المرور غير مطابقة للسجلات.";
+                    errorMsg.style.display = 'block'; 
+                    btn.innerText = "تسجيل الدخول"; 
+                    btn.disabled = false;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
