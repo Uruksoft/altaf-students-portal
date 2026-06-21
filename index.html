@@ -2,8 +2,9 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <!-- قفل التكبير التلقائي في شاشات الهواتف -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>تسجيل الدخول | مدرسة الطف الابتدائية</title>
+    <title>تسجيل الدخول | مدرسة الطف</title>
     
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#1e3c72">
@@ -12,194 +13,266 @@
     <meta name="apple-mobile-web-app-title" content="مدرسة الطف">
     <link rel="apple-touch-icon" href="https://b.top4top.io/p_3738g1q971.png">
 
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* 1. التصحيح الجذري لبناء متغيرات الـ CSS */
         :root {
             --primary: #1e3c72;
             --secondary: #2a5298;
             --accent: #f1c40f;
-            --text-dark: #1e293b;
-            --text-light: #64748b;
+            --bg-page: #f1f5f9;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
         }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Cairo', sans-serif;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             background: linear-gradient(-45deg, #f8fafc, #e2e8f0, #cbd5e1, #e0e7ff);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
-            position: relative;
+            min-height: 100dvh; /* dvh: Dynamic Viewport (تتجاهل شريط سفاري السفلي بالآيفون) */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            padding: 15px;
             overflow-x: hidden;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+        /* الأشكال الخلفية الجمالية */
+        .bg-shapes { position: absolute; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; top: 0; right: 0; }
+        .shape { position: absolute; filter: blur(70px); opacity: 0.5; border-radius: 50%; }
+        .s1 { width: 350px; height: 350px; background: var(--primary); top: -100px; right: -50px; }
+        .s2 { width: 400px; height: 400px; background: #93c5fd; bottom: -100px; left: -50px; }
+
+        .app-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 960px;
         }
 
-        .shape { position: absolute; filter: blur(70px); z-index: -1; animation: float 12s infinite ease-in-out alternate; }
-        .shape-1 { width: 350px; height: 350px; background: rgba(30, 60, 114, 0.15); top: -100px; right: -50px; border-radius: 50%; }
-        .shape-2 { width: 450px; height: 450px; background: rgba(241, 196, 15, 0.1); bottom: -150px; left: -100px; border-radius: 50%; animation-delay: -6s; }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(40px, 60px) scale(1.1); }
-        }
-
-        .glass-container {
-            background: rgba(255, 255, 255, 0.85);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            border-radius: 20px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
-            width: 90%;
-            max-width: 1000px;
-            display: flex;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(15, 23, 42, 0.1);
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
             overflow: hidden;
-            z-index: 1;
         }
 
-        .info-section {
-            flex: 1;
+        /* --- القسم الأيمن بالكمبيوتر (الهوية والبراند) --- */
+        .brand-side {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 40px;
+            padding: 45px 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .brand-header { text-align: right; }
+        .brand-header img { width: 95px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3)); margin-bottom: 20px; }
+        .brand-header h1 { font-size: 2.2rem; font-weight: 900; line-height: 1.2; margin-bottom: 12px; }
+        .brand-header p { font-size: 1.05rem; opacity: 0.9; line-height: 1.7; font-weight: 600; }
+
+        .desktop-support { background: rgba(255,255,255,0.08); padding: 20px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.12); }
+        .desktop-support span { display: block; font-size: 0.9rem; font-weight: 800; color: var(--accent); margin-bottom: 12px; }
+        .support-btns-row { display: flex; gap: 10px; }
+        .support-btns-row a { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 10px; color: white; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: 0.2s; }
+        .btn-wa { background: #25D366; } .btn-wa:hover { background: #1fba59; }
+        .btn-tg { background: #0088cc; } .btn-tg:hover { background: #0077b5; }
+
+        /* --- القسم الأيسر بالكمبيوتر (الفورم) --- */
+        .form-side {
+            padding: 45px 40px;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
-        .info-section img { width: 100px; margin-bottom: 20px; filter: drop-shadow(0 4px 15px rgba(0,0,0,0.4)); }
-        .info-section h1 { margin: 0 0 15px 0; font-size: 2.2rem; font-weight: 800; line-height: 1.3; }
-        .info-section p.desc { font-size: 1.05rem; line-height: 1.8; opacity: 0.95; margin-bottom: 30px; }
-        
-        .contact-box { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); }
-        .contact-box h3 { margin: 0 0 15px 0; font-size: 1.1rem; color: var(--accent); }
-        
-        .social-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
-        .btn-social { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 8px; color: white; text-decoration: none; font-weight: bold; font-size: 1rem; transition: 0.3s; }
-        .btn-whatsapp { background: #25D366; } .btn-whatsapp:hover { background: #20b858; transform: translateY(-2px); }
-        .btn-telegram { background: #0088cc; } .btn-telegram:hover { background: #0077b5; transform: translateY(-2px); }
+        .form-title { margin-bottom: 30px; }
+        .form-title h2 { font-size: 1.8rem; font-weight: 900; color: var(--primary); margin-bottom: 4px; }
+        .form-title p { color: var(--text-muted); font-size: 0.95rem; font-weight: 600; }
 
-        .login-section { flex: 1; padding: 50px 40px; display: flex; flex-direction: column; justify-content: center; }
-        .login-section h2 { color: var(--primary); font-size: 1.8rem; margin-top: 0; margin-bottom: 5px; font-weight: 800; }
-        .login-section p.subtitle { color: var(--text-light); margin-bottom: 30px; font-weight: 600; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; font-size: 0.9rem; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; text-align: right; }
+        .input-group input {
+            width: 100%;
+            padding: 15px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 16px !important; /* STRICT 16px: قفل إجباري يمنع زوم الآيفون */
+            font-weight: 700;
+            background: #f8fafc;
+            color: var(--text-dark);
+            outline: none;
+            transition: all 0.2s;
+        }
+        .input-group input:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 4px rgba(30, 60, 114, 0.08); }
 
-        .input-group { margin-bottom: 20px; text-align: right; }
-        .input-group label { display: block; margin-bottom: 8px; color: var(--text-dark); font-weight: bold; font-size: 0.95rem; }
-        .input-group input { width: 100%; padding: 15px; border: 2px solid #e2e8f0; border-radius: 10px; font-family: 'Cairo'; font-weight: 700; box-sizing: border-box; outline: none; transition: 0.3s; font-size: 1.05rem; background: rgba(255,255,255,0.9); color: var(--text-dark); }
-        .input-group input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(30, 60, 114, 0.1); }
+        .btn-login {
+            width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 12px; font-family: 'Cairo'; font-size: 1.1rem; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.2s; margin-top: 10px;
+        }
+        .btn-login:hover:not(:disabled) { background: #152b52; transform: translateY(-2px); }
+        .btn-login:disabled { opacity: 0.7; cursor: not-allowed; }
 
-        .btn-login { background: var(--primary); color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: 0.3s; font-family: 'Cairo'; box-shadow: 0 10px 20px rgba(30, 60, 114, 0.2); margin-top: 10px; }
-        .btn-login:hover { background: #152b52; transform: translateY(-2px); }
-        .btn-login:disabled { background: #94a3b8; cursor: not-allowed; transform: none; }
+        #error-msg { background: #fef2f2; color: #ef4444; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 0.9rem; text-align: center; border: 1px solid #fca5a5; margin-top: 15px; display: none; }
 
-        #error-msg { background: #fee2e2; color: #dc2626; padding: 12px; border-radius: 8px; font-weight: bold; margin-top: 15px; text-align: center; border: 1px solid #f87171; display: none; font-size: 0.95rem; }
-        footer { margin-top: 25px; text-align: center; color: var(--text-light); font-size: 0.95rem; font-weight: 700; z-index: 1; }
+        .mobile-support-bar { display: none; }
 
-        @media (max-width: 900px) {
-            .glass-container { flex-direction: column; width: 95%; margin: 20px 0; }
-            .info-section { padding: 30px 20px; text-align: center; } .info-section img { margin: 0 auto 15px auto; width: 85px; }
-            .login-section { padding: 30px 20px; }
+        .copyright { text-align: center; font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-top: 16px; }
+
+        /* ======================================================
+           📱 الهندسة العكسية المخصصة للهواتف (تحت قياس 768px)
+           ====================================================== */
+        @media (max-width: 768px) {
+            body {
+                align-items: flex-start; /* تحرير الصفحة من التوسيط العمودي حتى لا ينعصر الفورم مع الكيبورد */
+                padding: 12px;
+            }
+
+            .glass-card {
+                grid-template-columns: 1fr;
+                border-radius: 20px;
+            }
+
+            /* 1. تحويل الهيدر الضخم إلى "App Bar" نحيف في أعلى الهاتف */
+            .brand-side {
+                padding: 16px 20px;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 15px;
+            }
+
+            .brand-header { display: flex; align-items: center; gap: 14px; text-align: right; }
+            .brand-header img { width: 50px; margin-bottom: 0; }
+            .brand-header h1 { font-size: 1.25rem; margin-bottom: 0; line-height: 1.1; }
+            .brand-header p { display: none; } /* إخفاء الوصف الطويل في الهاتف كلياً */
+
+            .desktop-support { display: none; } /* إخفاء صندوق الدعم الكبير */
+
+            /* 2. إعطاء مساحة التنفس القصوى للفورم */
+            .form-side { padding: 30px 22px; }
+
+            .form-title { margin-bottom: 22px; text-align: center; }
+            .form-title h2 { font-size: 1.55rem; }
+            .form-title p { font-size: 0.85rem; }
+
+            .input-group { margin-bottom: 16px; }
+            .input-group label { font-size: 0.85rem; margin-bottom: 6px; }
+            .input-group input { padding: 13px 15px; }
+
+            .btn-login { padding: 14px; font-size: 1.05rem; }
+
+            /* 3. إظهار الدعم الفني في الهاتف كشريط سفلي مصغر وملموم */
+            .mobile-support-bar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-top: 25px;
+                padding-top: 15px;
+                border-top: 1px dashed #cbd5e1;
+            }
+            .mobile-support-bar span { font-size: 0.85rem; font-weight: 800; color: var(--text-muted); }
+            .m-btns { display: flex; gap: 8px; }
+            .m-btns a { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.1rem; text-decoration: none; }
+            .m-btns .w { background: #25D366; } .m-btns .t { background: #0088cc; }
         }
     </style>
 </head>
 <body>
 
-    <div class="shape shape-1"></div><div class="shape shape-2"></div>
+    <div class="bg-shapes"><div class="shape s1"></div><div class="shape s2"></div></div>
 
-    <div class="glass-container">
-        <div class="info-section">
-            <img src="https://b.top4top.io/p_3738g1q971.png" alt="شعار مدرسة الطف">
-            <h1>إدارة مدرسة الطف الابتدائية للبنين</h1>
-            <p class="desc">بوابة إلكترونية متكاملة صُممت خصيصاً لإدارة ومتابعة التقييمات الأكاديمية والدرجات الشهرية.</p>
-            <div class="contact-box">
-                <h3>📞 تواصل مع الدعم الفني</h3>
-                <div class="social-buttons">
-                    <a href="https://wa.me/9647815202022" class="btn-social btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> واتساب</a>
-                    <a href="https://t.me/murtada2015" class="btn-social btn-telegram" target="_blank"><i class="fab fa-telegram-plane"></i> تيليجرام</a>
+    <div class="app-wrapper">
+        <div class="glass-card">
+            
+            <!-- الهوية (يمين بالكمبيوتر / شريط علوي بالهاتف) -->
+            <div class="brand-side">
+                <div class="brand-header">
+                    <img src="https://b.top4top.io/p_3738g1q971.png" alt="مدرسة الطف">
+                    <div>
+                        <h1>مدرسة الطف</h1>
+                        <p>بوابة الكادر التعليمي والتقييم الأكاديمي</p>
+                    </div>
+                </div>
+
+                <div class="desktop-support">
+                    <span>تواجه مشكلة في الدخول؟</span>
+                    <div class="support-btns-row">
+                        <a href="https://wa.me/9647815202022" class="btn-wa" target="_blank"><i class="fab fa-whatsapp"></i> واتساب</a>
+                        <a href="https://t.me/murtada2015" class="btn-tg" target="_blank"><i class="fab fa-telegram-plane"></i> تيليجرام</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="login-section">
-            <h2>تسجيل الدخول للكادر</h2>
-            <p class="subtitle">الرجاء إدخال بيانات الاعتماد الممنوحة لك من الإدارة.</p>
-            <form id="login-form">
-                <div class="input-group"><label>البريد الإلكتروني</label><input type="email" id="email" placeholder="admin@school.com" dir="ltr" required autocomplete="username"></div>
-                <div class="input-group"><label>كلمة المرور</label><input type="password" id="password" placeholder="••••••••" dir="ltr" required autocomplete="current-password"></div>
-                <button type="submit" id="login-btn" class="btn-login">تسجيل الدخول</button>
-            </form>
-            <div id="error-msg"></div>
+            <!-- الفورم (يسار بالكمبيوتر / المنتصف بالهاتف) -->
+            <div class="form-side">
+                <div class="form-title">
+                    <h2>تسجيل الدخول</h2>
+                    <p>أدخل بيانات الاعتماد الممنوحة لك من الإدارة</p>
+                </div>
+
+                <form id="login-form">
+                    <div class="input-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" id="email" placeholder="admin@school.com" dir="ltr" required autocomplete="username">
+                    </div>
+                    <div class="input-group">
+                        <label>كلمة المرور</label>
+                        <input type="password" id="password" placeholder="••••••••" dir="ltr" required autocomplete="current-password">
+                    </div>
+                    <button type="submit" id="login-btn" class="btn-login">تسجيل الدخول <i class="fas fa-sign-in-alt"></i></button>
+                </form>
+
+                <div id="error-msg"></div>
+
+                <!-- شريط المساعدة المخصص للهواتف فقط -->
+                <div class="mobile-support-bar">
+                    <span>الدعم الفني:</span>
+                    <div class="m-btns">
+                        <a href="https://wa.me/9647815202022" class="w" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://t.me/murtada2015" class="t" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+                    </div>
+                </div>
+            </div>
+
         </div>
+        <div class="copyright">© 2026 جميع الحقوق محفوظة - نظام مدرسة الطف</div>
     </div>
-
-    <footer>© 2026 جميع الحقوق محفوظة - نظام إدارة مدرسة الطف</footer>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-        const firebaseConfig = { 
-            apiKey: "AIzaSyDBMqHv6elH7q9S0niigrv7y7p8ZkEsOVE", 
-            authDomain: "altaf-students-portal.firebaseapp.com", 
-            projectId: "altaf-students-portal" 
-        };
+        const firebaseConfig = { apiKey: "AIzaSyDBMqHv6elH7q9S0niigrv7y7p8ZkEsOVE", authDomain: "altaf-students-portal.firebaseapp.com", projectId: "altaf-students-portal" };
+        let app, auth; try { app = initializeApp(firebaseConfig); auth = getAuth(app); } catch(e) {}
 
-        // 2. تصفيح الفايربيز بـ Try..Catch حتى لا ينهار الموقع لو كان النت ضعيف
-        let app, auth;
-        try {
-            app = initializeApp(firebaseConfig); 
-            auth = getAuth(app);
-        } catch(e) {
-            console.error("Firebase init fallback:", e);
-        }
-
-        // 3. درع حماية PWA: لا يطلب التثبيت إلا لو كان شغال على سيرفر حقيقي أو Live Server
         if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js').catch(err => console.log("SW bypass notice:", err));
-            });
+            window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));
         }
 
-        const loginForm = document.getElementById('login-form');
-        if(loginForm) {
-            loginForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                if(!auth) {
-                    alert("تعذر الاتصال بخوادم المصادقة. تأكد من جودة الإنترنت.");
-                    return;
-                }
+        const form = document.getElementById('login-form');
+        if(form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault(); if(!auth) return alert("تأكد من اتصالك بالإنترنت.");
+                const email = document.getElementById('email').value.trim(); const password = document.getElementById('password').value.trim();
+                const btn = document.getElementById('login-btn'); const errorMsg = document.getElementById('error-msg');
+                btn.innerHTML = "جاري التحقق... ⏳"; btn.disabled = true; errorMsg.style.display = 'none';
 
-                const email = document.getElementById('email').value.trim(); 
-                const password = document.getElementById('password').value.trim();
-                const btn = document.getElementById('login-btn'); 
-                const errorMsg = document.getElementById('error-msg');
-
-                btn.innerText = "جاري التحقق... ⏳"; 
-                btn.disabled = true; 
-                errorMsg.style.display = 'none';
-
-                try {
-                    await signInWithEmailAndPassword(auth, email, password);
-                    window.location.replace("dashboard.html");
-                } catch (error) {
-                    errorMsg.textContent = "عذراً، البريد الإلكتروني أو كلمة المرور غير مطابقة للسجلات.";
-                    errorMsg.style.display = 'block'; 
-                    btn.innerText = "تسجيل الدخول"; 
-                    btn.disabled = false;
-                }
+                try { await signInWithEmailAndPassword(auth, email, password); window.location.replace("dashboard.html"); } 
+                catch (err) { errorMsg.textContent = "بيانات الدخول غير صحيحة."; errorMsg.style.display = 'block'; btn.innerHTML = 'تسجيل الدخول <i class="fas fa-sign-in-alt"></i>'; btn.disabled = false; }
             });
         }
     </script>
